@@ -1,0 +1,76 @@
+{
+  "project_info": {
+    "project_number": "969234145207",
+    "project_id": "cucei-verde",
+    "storage_bucket": "cucei-verde.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:969234145207:android:4eceb925145805517ad232",
+        "android_client_info": {
+          "package_name": "com.example.ResenaProfesores"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "969234145207-us82ubsp70g0ma972hjmjmvcc12i5bnc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAjaDNZ7_arTxMYVvnpPKIy9e3E7w96EkA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "969234145207-q5f25okroaek0vlkvco35q0j4noetd9b.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:969234145207:android:661bbb0ef53874597ad232",
+        "android_client_info": {
+          "package_name": "com.example.resea_profesores"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "969234145207-u7r923ikikg9qg4mddcu4fvlrekhaqrg.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.resea_profesores",
+            "certificate_hash": "2353c1b0800ae2e39cd42caf70145d0b197a997b"
+          }
+        },
+        {
+          "client_id": "969234145207-us82ubsp70g0ma972hjmjmvcc12i5bnc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAjaDNZ7_arTxMYVvnpPKIy9e3E7w96EkA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "969234145207-q5f25okroaek0vlkvco35q0j4noetd9b.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

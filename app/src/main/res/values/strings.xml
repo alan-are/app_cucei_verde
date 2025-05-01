@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name" translatable="false">Cucei_Verde</string>
+    <string name="default_web_client_id" translatable="false">969234145207-us82ubsp70g0ma972hjmjmvcc12i5bnc.apps.googleusercontent.com</string>
+    <string name="crear_cuenta">CREAR CUENTA</string>
+</resources>
