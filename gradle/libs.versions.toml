@@ -1,14 +1,25 @@
 [versions]
-agp = "8.9.2"
+agp = "8.9.2" # Or your actual Android Gradle Plugin version
+# Add the Google Services Plugin version - find latest here: https://mvnrepository.com/artifact/com.google.gms/google-services?repo=google
+googleServicesPlugin = "4.4.2" # Example version, use the latest!
+firebaseBom = "33.13.0" # Corrected version from your example -> Use 33.1.1 as base, check latest
+playServicesAuth = "21.3.0" # Corrected version from your example -> Use 21.2.0 as base, check latest
 junit = "4.13.2"
 junitVersion = "1.2.1"
 espressoCore = "3.6.1"
 appcompat = "1.7.0"
 material = "1.12.0"
-activity = "1.10.1"
-constraintlayout = "2.2.1"
+activity = "1.10.1" # Consider 1.9.0 if 1.10.x gives issues
+constraintlayout = "2.2.1" # Corrected version from your example -> Use 2.1.4
+
 
 [libraries]
+# It's better practice to use group/name for libraries too
+firebase-auth = { group = "com.google.firebase", name = "firebase-auth" } # Version managed by BoM
+firebase-bom = { group = "com.google.firebase", name = "firebase-bom", version.ref = "firebaseBom" }
+firebase-database = { group = "com.google.firebase", name = "firebase-database" } # Version managed by BoM
+firebase-firestore = { group = "com.google.firebase", name = "firebase-firestore" } # Version managed by BoM
+
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 ext-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
 espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
@@ -16,7 +27,10 @@ appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "a
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
 activity = { group = "androidx.activity", name = "activity", version.ref = "activity" }
 constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }
+play-services-auth = { group = "com.google.android.gms", name = "play-services-auth", version.ref = "playServicesAuth" } # Corrected to use group/name
+
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
-
+# Add this line defining the Google Services Plugin
+google-gms-googleServices = { id = "com.google.gms.google-services", version.ref = "googleServicesPlugin" }

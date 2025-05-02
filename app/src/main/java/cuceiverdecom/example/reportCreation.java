@@ -13,12 +13,12 @@ public class reportCreation extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activty_report_creation);
+        setContentView(R.layout.activity_report_creation);
 
         backBtn = findViewById(R.id.backButtonReportCreation);
 
         backBtn.setOnClickListener(v -> {
-            Intent intent = new Intent(reportCreation.this, com.example.resea_profesores.menu_principal.class);
+            Intent intent = new Intent(reportCreation.this, cuceiverdecom.example.mainActivity.class);
             startActivity(intent);
             finish();
         });

@@ -58,7 +58,7 @@ public class menu_principal extends AppCompatActivity {
 
             // 4. Redirige al login
             Toast.makeText(this, "Sesión cerrada", Toast.LENGTH_SHORT).show();
-            startActivity(new Intent(this, com.example.resea_profesores.mainActivity.class));
+            startActivity(new Intent(this, cuceiverdecom.example.mainActivity.class));
             finish();
         });
     }
