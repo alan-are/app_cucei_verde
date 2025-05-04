@@ -1,5 +1,9 @@
 package cuceiverdecom.example;
 
+import static cuceiverdecom.example.R.*;
+
+import cuceiverdecom.example.R;
+
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.net.Uri;
@@ -58,7 +62,7 @@ public class menu_principal extends AppCompatActivity {
 
             // 4. Redirige al login
             Toast.makeText(this, "Sesión cerrada", Toast.LENGTH_SHORT).show();
-            startActivity(new Intent(this, com.example.resea_profesores.mainActivity.class));
+            startActivity(new Intent(this, mainActivity.class));
             finish();
         });
     }
