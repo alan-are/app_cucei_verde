@@ -16,22 +16,27 @@
 
         <activity
             android:name=".mainActivity"
+            android:theme="@style/Theme.NoStatusBar"
             android:exported="true">
         </activity>
         <activity
             android:name=".reportCreation"
+            android:theme="@style/Theme.NoStatusBar"
             android:exported="true">
         </activity>
         <activity
             android:name=".RegisterActivity"
+            android:theme="@style/Theme.NoStatusBar"
             android:exported="true">
         </activity>
         <activity
             android:name=".menu_principal"
+            android:theme="@style/Theme.NoStatusBar"
             android:exported="true">
         </activity>
         <activity
             android:name=".principal"
+            android:theme="@style/Theme.NoStatusBar"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -1,5 +1,21 @@
 [versions]
+activityKtx = "1.10.1"
 agp = "8.9.2"
+androidxJunit = "1.1.5"
+appcompatVersion = "1.6.1"
+cardview = "1.0.0"
+compiler = "4.16.0"
+constraintlayoutVersion = "2.1.4"
+core = "1.16.0"
+credentialsPlayServicesAuth = "1.2.0"
+credentialsVersion = "1.2.0"
+espressoCoreVersion = "3.5.1"
+exifinterface = "1.4.1"
+firebaseAuthKtx = "23.2.0"
+firebaseBomVersion = "32.3.1"
+firebaseFirestoreKtx = "25.1.4"
+firebaseStorageKtx = "21.0.1"
+glide = "4.16.0"
 junit = "4.13.2"
 junitVersion = "1.2.1"
 espressoCore = "3.6.1"
@@ -9,19 +25,43 @@ activity = "1.10.1"
 constraintlayout = "2.2.1"
 
 firebaseBom = "33.0.0"  # Usa el BOM para manejar versiones de Firebase
+materialVersion = "1.9.0"
 playServicesAuth = "21.1.0"  # Google Sign-In
-credentials = "1.3.0"  # Credentials API
+credentials = "1.3.0"
+firebaseStorage = "21.0.1"
+firebaseFirestore = "25.1.4"  # Credentials API
+playServicesAuthVersion = "20.7.0"
+playServicesLocation = "21.3.0"
 
 [libraries]
 
 # Firebase (usando BOM para versiones automáticas)
+activity-ktx = { module = "androidx.activity:activity-ktx", version.ref = "activityKtx" }
+appcompat-v161 = { module = "androidx.appcompat:appcompat", version.ref = "appcompatVersion" }
+cardview = { module = "androidx.cardview:cardview", version.ref = "cardview" }
+compiler = { module = "com.github.bumptech.glide:compiler", version.ref = "compiler" }
+constraintlayout-v214 = { module = "androidx.constraintlayout:constraintlayout", version.ref = "constraintlayoutVersion" }
+core = { module = "androidx.core:core", version.ref = "core" }
+credentials-play-services-auth-v120 = { module = "androidx.credentials:credentials-play-services-auth", version.ref = "credentialsPlayServicesAuth" }
+credentials-v120 = { module = "androidx.credentials:credentials", version.ref = "credentialsVersion" }
+espresso-core-v351 = { module = "androidx.test.espresso:espresso-core", version.ref = "espressoCoreVersion" }
+exifinterface = { module = "androidx.exifinterface:exifinterface", version.ref = "exifinterface" }
 firebase-analytics-ktx = { module = "com.google.firebase:firebase-analytics-ktx" }
+firebase-auth-ktx = { module = "com.google.firebase:firebase-auth-ktx", version.ref = "firebaseAuthKtx" }
 firebase-bom = { group = "com.google.firebase", name = "firebase-bom", version.ref = "firebaseBom" }
 firebase-auth = { group = "com.google.firebase", name = "firebase-auth" }  # Versión controlada por BOM
+firebase-bom-v3231 = { module = "com.google.firebase:firebase-bom", version.ref = "firebaseBomVersion" }
 firebase-database = { group = "com.google.firebase", name = "firebase-database" }
 
 # Google Sign-In
+firebase-database-ktx = { module = "com.google.firebase:firebase-database-ktx" }
+firebase-firestore-ktx = { module = "com.google.firebase:firebase-firestore-ktx", version.ref = "firebaseFirestoreKtx" }
+firebase-storage-ktx = { module = "com.google.firebase:firebase-storage-ktx", version.ref = "firebaseStorageKtx" }
+glide = { module = "com.github.bumptech.glide:glide", version.ref = "glide" }
+google-firebase-analytics-ktx = { module = "com.google.firebase:firebase-analytics-ktx" }
 google-firebase-auth = { module = "com.google.firebase:firebase-auth" }
+junit-v115 = { module = "androidx.test.ext:junit", version.ref = "androidxJunit" }
+material-v190 = { module = "com.google.android.material:material", version.ref = "materialVersion" }
 play-services-auth = { group = "com.google.android.gms", name = "play-services-auth", version.ref = "playServicesAuth" }
 
 # Credentials API
@@ -35,6 +75,10 @@ appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "a
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
 activity = { group = "androidx.activity", name = "activity", version.ref = "activity" }
 constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }
+firebase-storage = { group = "com.google.firebase", name = "firebase-storage", version.ref = "firebaseStorage" }
+firebase-firestore = { group = "com.google.firebase", name = "firebase-firestore", version.ref = "firebaseFirestore" }
+play-services-auth-v2070 = { module = "com.google.android.gms:play-services-auth", version.ref = "playServicesAuthVersion" }
+play-services-location = { module = "com.google.android.gms:play-services-location", version.ref = "playServicesLocation" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
