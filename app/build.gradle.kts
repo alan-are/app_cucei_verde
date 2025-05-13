@@ -34,11 +34,15 @@ android {
         // Keep source/target compatibility as needed, 11 is common.
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
-    }
-    // If you are using View Binding or Data Binding, enable it here
+    }    // Si estás usando View Binding o Data Binding, habilítalo aquí
     // buildFeatures {
     //    viewBinding = true
     // }
+    
+    // Habilitar BuildConfig para acceder a BuildConfig.DEBUG
+    buildFeatures {
+        buildConfig = true
+    }
 }
 
 dependencies {
