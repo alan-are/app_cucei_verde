@@ -134,8 +134,7 @@ public class ReportListActivity extends AppCompatActivity implements ReportAdapt
 
     @Override
     public boolean onSupportNavigateUp() {
-        // Handle the back button click on the toolbar
-        onBackPressed(); // This will call finish() on the activity
+        onBackPressed();
         return true;
     }
 }

@@ -74,18 +74,6 @@ public class menu_principal extends AppCompatActivity {
                 new android.os.Handler().postDelayed(this::logoutUser, 300);
             });
         }
-        
-        chatIcon = findViewById(R.id.imageView);
-        if (chatIcon != null) {
-            chatIcon.setOnClickListener(v -> {
-                // Aplicar animación al ícono del chat
-                Animation pulseAnimation = AnimationUtils.loadAnimation(this, R.anim.pulse);
-                v.startAnimation(pulseAnimation);
-                
-                Toast.makeText(this, "Iniciando chat...", Toast.LENGTH_SHORT).show();
-                // Implementar la funcionalidad del chat
-            });
-        }
     }    private void logoutUser() {
         // 1. Cierra sesión en Firebase
         FirebaseAuth.getInstance().signOut();
@@ -141,19 +129,6 @@ public class menu_principal extends AppCompatActivity {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-                      
-            try {
-                View chatIcon = findViewById(R.id.imageView);
-                if (chatIcon != null) {
-                    View parent = (View) chatIcon.getParent();
-                    if (parent != null && parent.getParent() instanceof CardView) {
-                        chatCard = (CardView) parent.getParent();
-                    }
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            
             try {
                 animationContainer = findViewById(R.id.animationContainer);
             } catch (Exception e) {

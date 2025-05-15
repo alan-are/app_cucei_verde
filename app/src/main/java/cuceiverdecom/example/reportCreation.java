@@ -57,22 +57,12 @@ public class reportCreation extends AppCompatActivity {
         btnAccion = findViewById(R.id.btnAccion);
         editTextTitle = findViewById(R.id.editTextTitle);
         editTextDescription = findViewById(R.id.editTextTextMultiLine2);
-        imageButton = findViewById(R.id.imageButton);
-        imageButton2 = findViewById(R.id.imageButton2);
         
         // Configurar el botón de acción para enviar el reporte
         btnAccion.setOnClickListener(v -> {
             validateAndSubmitReport();
         });
-        
-        // Por ahora, estos botones mostrarán mensajes de que la funcionalidad está en desarrollo
-        imageButton.setOnClickListener(v -> {
-            Toast.makeText(this, "Funcionalidad de imagen en desarrollo", Toast.LENGTH_SHORT).show();
-        });
-        
-        imageButton2.setOnClickListener(v -> {
-            Toast.makeText(this, "Funcionalidad de ubicación en desarrollo", Toast.LENGTH_SHORT).show();
-        });
+
     }
 
     @Override
