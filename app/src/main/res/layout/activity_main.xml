@@ -6,85 +6,137 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_gravity="clip_horizontal|center"
-    android:background="#CC000000"
+    android:background="@drawable/gradient_background"
     tools:context=".mainActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
-
-        <TextView
-            android:id="@+id/textView"
+        android:orientation="vertical"
+        android:padding="16dp">        <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#4CAF50"
-            android:gravity="center"
-            android:shadowColor="#FAFAFA"
-            android:text="CUCEI Verde"
-            android:textColor="#FFFFFF"
-            android:textColorLink="#4CAF50"
-            android:textSize="34sp" />
-
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="20dp" />
+            app:cardCornerRadius="12dp"
+            app:cardElevation="4dp"
+            android:layout_marginBottom="24dp">
+            
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/header_gradient"
+                android:gravity="center"
+                android:paddingTop="16dp"
+                android:paddingBottom="16dp"
+                android:text="CUCEI Verde"
+                android:textColor="#FFFFFF"
+                android:textSize="36sp"
+                android:fontFamily="sans-serif-medium" />
+        </androidx.cardview.widget.CardView>
 
         <TextView
             android:id="@+id/textView2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="Inicio de sesion"
+            android:text="Inicio de sesión"
             android:textColor="#FFFFFF"
-            android:textColorLink="#FFFFFF"
-            android:textSize="20sp"
-            android:textStyle="bold" />
-
-        <EditText
-            android:id="@+id/editEmailLogin"
+            android:textSize="22sp"
+            android:fontFamily="sans-serif-medium"
+            android:layout_marginBottom="32dp" />        <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:backgroundTint="#00C853"
-            android:ems="10"
-            android:gravity="start"
-            android:hint="Ingresa tu correo"
-            android:inputType="text"
-            android:textColor="#FFFFFF"
-            android:textColorHint="#AAFFFFFF" />
+            app:cardCornerRadius="8dp"
+            app:cardElevation="2dp"
+            android:layout_marginBottom="16dp"
+            app:cardBackgroundColor="#33FFFFFF">
+            
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="8dp">
+                
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/ic_email"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="8dp"
+                    app:tint="#FFFFFF" />
+                
+                <EditText
+                    android:id="@+id/editEmailLogin"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/transparent"
+                    android:ems="10"
+                    android:hint="Ingresa tu correo"
+                    android:inputType="textEmailAddress"
+                    android:padding="12dp"
+                    android:textColor="#FFFFFF"
+                    android:textColorHint="#AAFFFFFF"
+                    android:fontFamily="sans-serif" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
 
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="10dp" />
-
-        <EditText
-            android:id="@+id/editPasswordLogin"
+        <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:backgroundTint="#00C853"
-            android:ems="10"
-            android:gravity="center|start"
-            android:hint="Ingresa tu contraseña"
-            android:inputType="text|textPassword|textNoSuggestions"
-            android:textColorHint="#AAFFFFFF" />
-
-        <Space
+            app:cardCornerRadius="8dp"
+            app:cardElevation="2dp"
+            android:layout_marginBottom="24dp"
+            app:cardBackgroundColor="#33FFFFFF">
+            
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="8dp">
+                
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/ic_lock"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="8dp"
+                    app:tint="#FFFFFF" />
+                
+                <EditText
+                    android:id="@+id/editPasswordLogin"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/transparent"
+                    android:ems="10"
+                    android:hint="Ingresa tu contraseña"
+                    android:inputType="textPassword"
+                    android:padding="12dp"
+                    android:textColor="#FFFFFF"
+                    android:textColorHint="#AAFFFFFF"
+                    android:fontFamily="sans-serif" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>        <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
-            android:layout_height="20dp" />
-
-        <Button
-            android:id="@+id/btnLogin"
-            android:layout_width="390dp"
-            android:layout_height="50dp"
-            android:layout_gravity="center"
-            android:backgroundTint="#8BC34A"
-            android:text="INICIAR SESION"
-            android:textStyle="bold"
-            android:textColor="#FFFFFF"/>
-
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="15dp" />
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="25dp"
+            app:cardElevation="4dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="24dp">
+            
+            <Button
+                android:id="@+id/btnLogin"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="@drawable/button_gradient"
+                android:text="INICIAR SESIÓN"
+                android:textStyle="bold"
+                android:textColor="#FFFFFF"
+                android:fontFamily="sans-serif-medium"
+                android:textSize="16sp"/>
+        </androidx.cardview.widget.CardView>
 
         <TextView
             android:id="@+id/textView6"
@@ -93,54 +145,55 @@
             android:gravity="center"
             android:text="ó"
             android:textColor="#E0DFDF"
-            android:textColorLink="#FFFFFF"
-            android:textSize="34sp" />
+            android:textSize="18sp"
+            android:layout_marginBottom="24dp"/>
 
-        <Space
+        <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
-            android:layout_height="15dp" />
-
-        <Button
-            android:id="@+id/button2"
-            android:layout_width="390dp"
-            android:layout_height="50dp"
-            android:layout_gravity="center"
-            android:backgroundTint="#FFFFFF"
-            android:drawableLeft="@drawable/googleg_standard_color_18"
-            android:text="INICIAR SESION CON GOOGLE"
-            android:textAlignment="center"
-            android:textColor="#000000"
-            android:textStyle="bold" />
-
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="42dp" />
-
-        <TextView
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="25dp"
+            app:cardElevation="4dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="32dp">
+            
+            <Button
+                android:id="@+id/button2"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="#FFFFFF"
+                android:drawableStart="@drawable/googleg_standard_color_18"
+                android:drawablePadding="8dp"
+                android:paddingStart="16dp"
+                android:text="INICIAR SESIÓN CON GOOGLE"
+                android:textAlignment="center"
+                android:textColor="#5F6368"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:fontFamily="sans-serif-medium"/>
+        </androidx.cardview.widget.CardView>        <TextView
             android:id="@+id/textViewSignUp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:clickable="true"
+            android:focusable="true"
             android:gravity="center"
-            android:text="¿No tienes una cuenta? ¡Registrate!"
-            android:textColor="#ff6750a4"
-            android:textColorLink="#ff6750a4"
-            android:textSize="24sp"
-            android:textStyle="bold" />
-
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="60dp" />
+            android:text="¿No tienes una cuenta? ¡Regístrate!"
+            android:textColor="#4CAF50"
+            android:textSize="16sp"
+            android:fontFamily="sans-serif-medium"
+            android:background="?attr/selectableItemBackground"
+            android:padding="8dp"/>
 
         <ProgressBar
             android:id="@+id/progressBarLogin"
             style="?android:attr/progressBarStyle"
-            android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:backgroundTintMode="src_in"
-            android:progressBackgroundTint="#00C853"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="32dp"
+            android:indeterminateTint="#4CAF50"
             android:visibility="invisible" />
-
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

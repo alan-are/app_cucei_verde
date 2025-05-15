@@ -21,7 +21,7 @@ public class principal extends AppCompatActivity {
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 } finally {
-                    Intent intent = new Intent(principal.this, mainActivity.class); // Change the intent to the activity you want to display after the splash screen
+                    Intent intent = new Intent(principal.this, com.example.resea_profesores.mainActivity.class); // Change the intent to the activity you want to display after the splash screen
                     startActivity(intent);
                     finish();
                 }

@@ -51,7 +51,7 @@ public class RegisterActivity extends AppCompatActivity {
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(RegisterActivity.this, mainActivity.class));
+                startActivity(new Intent(RegisterActivity.this, com.example.resea_profesores.mainActivity.class));
                 finish();
             }
         });
@@ -119,7 +119,7 @@ public class RegisterActivity extends AppCompatActivity {
 
                                 Toast.makeText(RegisterActivity.this, "Usuario " + name + " creado correctamente", Toast.LENGTH_SHORT).show();
                                 mAuth.signOut();
-                                startActivity(new Intent(RegisterActivity.this, mainActivity.class));
+                                startActivity(new Intent(RegisterActivity.this, com.example.resea_profesores.mainActivity.class));
                                 finish();
                             }
                             else{

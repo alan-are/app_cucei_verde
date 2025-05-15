@@ -1,8 +1,33 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
     <style name="Base.Theme.CuceiVerde" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <!-- Colores primarios -->
+        <item name="colorPrimary">@color/green_primary</item>
+        <item name="colorPrimaryVariant">@color/green_dark</item>
+        <item name="colorOnPrimary">@color/white</item>
+        
+        <!-- Colores secundarios -->
+        <item name="colorSecondary">@color/green_accent</item>
+        <item name="colorSecondaryVariant">@color/green_light</item>
+        <item name="colorOnSecondary">@color/black</item>
+        
+        <!-- Colores de fondo -->
+        <item name="android:colorBackground">@color/background_light</item>
+        <item name="colorSurface">@color/white</item>
+        <item name="colorOnSurface">@color/text_primary_dark</item>
+        
+        <!-- Status bar -->
+        <item name="android:statusBarColor">@color/green_dark</item>
+        <item name="android:windowLightStatusBar">false</item>
+        
+        <!-- Tipografía -->
+        <item name="android:fontFamily">@font/montserrat</item>
+        <item name="fontFamily">@font/montserrat</item>
+        
+        <!-- Redondeado de componentes -->
+        <item name="shapeAppearanceSmallComponent">@style/ShapeAppearance.CuceiVerde.SmallComponent</item>
+        <item name="shapeAppearanceMediumComponent">@style/ShapeAppearance.CuceiVerde.MediumComponent</item>
+        <item name="shapeAppearanceLargeComponent">@style/ShapeAppearance.CuceiVerde.LargeComponent</item>
     </style>
 
     <style name="Theme.NoStatusBar" parent="Theme.Material3.DayNight.NoActionBar">
@@ -11,4 +36,45 @@
     </style>
 
     <style name="Theme.CuceiVerde" parent="Base.Theme.CuceiVerde" />
+    
+    <!-- Estilos para los componentes redondeados -->
+    <style name="ShapeAppearance.CuceiVerde.SmallComponent" parent="ShapeAppearance.Material3.SmallComponent">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">8dp</item>
+    </style>
+    
+    <style name="ShapeAppearance.CuceiVerde.MediumComponent" parent="ShapeAppearance.Material3.MediumComponent">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">12dp</item>
+    </style>
+    
+    <style name="ShapeAppearance.CuceiVerde.LargeComponent" parent="ShapeAppearance.Material3.LargeComponent">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">16dp</item>
+    </style>
+    
+    <!-- Estilos para botones -->
+    <style name="Widget.CuceiVerde.Button" parent="Widget.Material3.Button">
+        <item name="android:textColor">@color/white</item>
+        <item name="backgroundTint">@color/green_primary</item>
+        <item name="android:paddingStart">16dp</item>
+        <item name="android:paddingEnd">16dp</item>
+        <item name="android:paddingTop">12dp</item>
+        <item name="android:paddingBottom">12dp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+    
+    <style name="Widget.CuceiVerde.Button.TextButton" parent="Widget.Material3.Button.TextButton">
+        <item name="android:textColor">@color/green_primary</item>
+        <item name="rippleColor">@color/green_light</item>
+    </style>
+    
+    <!-- Estilo para tarjetas -->
+    <style name="Widget.CuceiVerde.CardView" parent="Widget.Material3.CardView.Elevated">
+        <item name="cardCornerRadius">12dp</item>
+        <item name="cardElevation">4dp</item>
+        <item name="cardBackgroundColor">@color/white</item>
+        <item name="contentPadding">16dp</item>
+    </style>
 </resources>

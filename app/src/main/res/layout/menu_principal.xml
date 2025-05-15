@@ -26,25 +26,45 @@
             android:textColorLink="#4CAF50"
             android:textSize="34sp" />
 
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="20dp" />
+
         <TextView
             android:id="@+id/textView7"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingLeft="7dp"
-            android:paddingTop="7dp"
-            android:text="Lista de reportes creados:"
-            android:textColor="#FBFBFB"
+            android:gravity="center"
+            android:text="Top colaboradores destacados:"
+            android:textColor="#FFFFFF"
+            android:textSize="20sp"
             android:textStyle="bold" />
 
-        <ListView
-            android:id="@+id/listViewReports"
+        <TextView
+            android:id="@+id/textView9"
             android:layout_width="match_parent"
-            android:layout_height="475sp" />
+            android:layout_height="98dp"
+            android:gravity="center"
+            android:text="Sample text"
+            android:textSize="20sp" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="29dp" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="27dp"
             android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/textView15"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="Ver Reportes"
+                android:textSize="20sp" />
 
             <TextView
                 android:id="@+id/textView16"
@@ -53,9 +73,7 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="Crear reporte"
-                android:textColor="#FFFFFF"
-                android:textSize="20sp"
-                android:textStyle="bold" />
+                android:textSize="20sp" />
         </LinearLayout>
 
         <Space
@@ -64,14 +82,20 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="239dp"
             android:orientation="horizontal">
 
             <ImageButton
+                android:id="@+id/imageButton3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/images__1_" />
+
+            <ImageButton
                 android:id="@+id/btnCreateReport"
-                android:layout_width="50dp"
-                android:layout_height="100dp"
-                android:layout_gravity="left"
+                android:layout_width="match_parent"
+                android:layout_height="241dp"
                 android:layout_weight="1"
                 android:background="#00000000"
                 android:scaleType="fitCenter"
@@ -80,30 +104,51 @@
                 app:srcCompat="@android:drawable/ic_menu_add"
                 tools:srcCompat="@drawable/pngwing_com" />
 
-            <TextView
-                android:id="@+id/emptyReportsView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_margin="20dp"
-                android:gravity="center"
-                android:text="No hay reportes disponibles"
-                android:textSize="24sp"
-                android:textStyle="bold"
-                android:visibility="gone" />
-
         </LinearLayout>
 
-        <Button
-            android:id="@+id/log_out_btn"
-            android:layout_width="150dp"
-            android:layout_height="50dp"
-            android:layout_gravity="right|top"
-            android:backgroundTint="#D50000"
-            android:text="Cerrar sesion"
-            android:textColor="#FFFFFF"
-            android:textColorLink="#FFFFFF"
-            android:textStyle="bold" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textView17"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="Chat con el equipo de mantenimiento"
+                android:textSize="20sp" />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="33dp" />
+
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="wrap_content"
+                android:layout_height="13dp"
+                android:layout_gravity="center"
+                android:background="#4CAF50"
+                android:scaleX="5"
+                android:scaleY="5"
+                app:srcCompat="@android:drawable/stat_notify_chat" />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="115dp" />
+
+            <Button
+                android:id="@+id/log_out_btn"
+                android:layout_width="150dp"
+                android:layout_height="50dp"
+                android:layout_gravity="bottom|end"
+                android:backgroundTint="#D50000"
+                android:text="Cerrar sesion"
+                android:textColor="#FFFFFF"
+                android:textColorLink="#FFFFFF"
+                android:textStyle="bold" />
+
+        </LinearLayout>
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
