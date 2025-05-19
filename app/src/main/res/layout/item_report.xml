@@ -45,6 +45,57 @@
                 android:fontFamily="@font/montserrat"
                 android:textSize="12sp" />
 
+            <TextView
+                android:id="@+id/tvReportCategory"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Categoría: General"
+                android:textColor="@color/text_secondary_dark"
+                android:layout_marginTop="4dp"
+                android:fontFamily="@font/montserrat"
+                android:textSize="12sp" />
+
+            <!-- Status and Vote Counts Layout -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="4dp">
+
+                <TextView
+                    android:id="@+id/tvReportStatus"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Estado: Pendiente"
+                    android:textSize="12sp"
+                    android:fontFamily="@font/montserrat"
+                    android:textStyle="bold" />
+
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="1" />
+
+                <TextView
+                    android:id="@+id/tvSolvedVotes"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Resuelto: 0"
+                    android:textSize="12sp"
+                    android:fontFamily="@font/montserrat"
+                    android:textColor="@color/green_primary"
+                    android:layout_marginEnd="8dp" />
+
+                <TextView
+                    android:id="@+id/tvUnsolvedVotes"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="No Resuelto: 0"
+                    android:textSize="12sp"
+                    android:fontFamily="@font/montserrat"
+                    android:textColor="@color/accent_orange" />
+            </LinearLayout>
+
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
@@ -64,46 +115,69 @@
                 android:fontFamily="@font/montserrat"
                 android:textSize="14sp" />
 
+            <!-- Location Section -->
+            <TextView
+                android:id="@+id/tvReportLocationLabel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Ubicación:"
+                android:textColor="@color/text_secondary_dark"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/montserrat"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tvReportLocation"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="(Texto ingresado)"
+                android:textColor="@color/text_primary_dark"
+                android:layout_marginTop="2dp"
+                android:fontFamily="@font/montserrat"
+                android:textSize="14sp" />
+            <!-- End Location Section -->
+
             <LinearLayout
+                android:id="@+id/userActionLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:layout_marginTop="12dp">
+                android:layout_marginTop="16dp">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Estado:"
-                    android:textColor="@color/text_secondary_dark"
-                    android:textSize="12sp"
-                    android:fontFamily="@font/montserrat"
-                    android:layout_marginEnd="4dp" />
-
-                <TextView
-                    android:id="@+id/tvReportStatus"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Pendiente"
-                    android:textColor="@color/accent_orange"
-                    android:textSize="12sp"
-                    android:textStyle="bold"
-                    android:fontFamily="@font/montserrat" />
-
-                <View
+                <Button
+                    android:id="@+id/btnProblemSolved"
                     android:layout_width="0dp"
-                    android:layout_height="1dp"
-                    android:layout_weight="1" />
-
-                <TextView
-                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Ver detalles >"
-                    android:textColor="@color/green_primary"
-                    android:textSize="12sp"
-                    android:textStyle="bold"
+                    android:layout_weight="1"
+                    android:text="Problema resuelto"
+                    android:backgroundTint="@color/green_primary"
+                    android:textColor="@android:color/white"
+                    android:fontFamily="@font/montserrat"
+                    android:layout_marginEnd="8dp" />
+
+                <Button
+                    android:id="@+id/btnProblemNotSolved"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Problema no resuelto"
+                    android:backgroundTint="@color/accent_orange"
+                    android:textColor="@android:color/white"
                     android:fontFamily="@font/montserrat" />
             </LinearLayout>
-        </LinearLayout>
 
+            <Button
+                android:id="@+id/btnAdminDeleteReport"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Eliminar Reporte (Admin)"
+                android:backgroundTint="@color/red_error"
+                android:textColor="@android:color/white"
+                android:fontFamily="@font/montserrat"
+                android:layout_marginTop="8dp"
+                android:visibility="gone" /> <!-- Initially hidden -->
+
+        </LinearLayout>
     </LinearLayout>
 </androidx.cardview.widget.CardView>

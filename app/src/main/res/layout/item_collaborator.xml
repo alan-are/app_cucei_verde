@@ -1,0 +1,27 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:padding="8dp"
+    android:gravity="center_vertical">
+
+    <TextView
+        android:id="@+id/tvCollaboratorName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="Nombre del Colaborador"
+        android:textColor="@color/text_primary_dark"
+        android:textSize="16sp"
+        android:fontFamily="@font/montserrat" />
+
+    <TextView
+        android:id="@+id/tvPostCount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="0 Posts"
+        android:textColor="@color/green_primary"
+        android:textStyle="bold"
+        android:textSize="16sp"
+        android:fontFamily="@font/montserrat" />
+</LinearLayout>

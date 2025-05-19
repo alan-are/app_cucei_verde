@@ -1,8 +1,17 @@
 [versions]
 agp = "8.9.2" # Or your actual Android Gradle Plugin version
 # Add the Google Services Plugin version - find latest here: https://mvnrepository.com/artifact/com.google.gms/google-services?repo=google
+cardview = "1.0.0"
+coordinatorlayout = "1.3.0"
+coreKtx = "1.16.0"
 googleServicesPlugin = "4.4.2" # Example version, use the latest!
 firebaseBom = "33.13.0" # Corrected version from your example -> Use 33.1.1 as base, check latest
+firebaseStorage = "21.0.0" # Added Firebase Storage version, check latest
+glide = "4.16.0" # Added Glide version
+kotlin = "1.9.0" # Or your project\'s Kotlin version
+playServicesLocation = "21.3.0" # Added Play Services Location version
+placesSdk = "3.5.0" # Added Places SDK version
+materialVersion = "1.9.0"
 playServicesAuth = "21.3.0" # Corrected version from your example -> Use 21.2.0 as base, check latest
 junit = "4.13.2"
 junitVersion = "1.2.1"
@@ -14,11 +23,19 @@ constraintlayout = "2.2.1" # Corrected version from your example -> Use 2.1.4
 
 
 [libraries]
-# It's better practice to use group/name for libraries too
+# It\'s better practice to use group/name for libraries too
+cardview = { module = "androidx.cardview:cardview", version.ref = "cardview" }
+coordinatorlayout = { module = "androidx.coordinatorlayout:coordinatorlayout", version.ref = "coordinatorlayout" }
+core-ktx = { module = "androidx.core:core-ktx", version.ref = "coreKtx" }
 firebase-auth = { group = "com.google.firebase", name = "firebase-auth" } # Version managed by BoM
 firebase-bom = { group = "com.google.firebase", name = "firebase-bom", version.ref = "firebaseBom" }
 firebase-database = { group = "com.google.firebase", name = "firebase-database" } # Version managed by BoM
 firebase-firestore = { group = "com.google.firebase", name = "firebase-firestore" } # Version managed by BoM
+firebase-storage = { group = "com.google.firebase", name = "firebase-storage", version.ref = "firebaseStorage" } # Added Firebase Storage
+glide = { group = "com.github.bumptech.glide", name = "glide", version.ref = "glide" } # Added Glide
+glide-compiler = { group = "com.github.bumptech.glide", name = "compiler", version.ref = "glide" } # Added Glide Compiler
+play-services-location = { group = "com.google.android.gms", name = "play-services-location", version.ref = "playServicesLocation" } # Added Play Services Location
+places-sdk = { group = "com.google.android.libraries.places", name = "places", version.ref = "placesSdk" } # Added Places SDK
 
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 ext-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
@@ -27,6 +44,7 @@ appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "a
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
 activity = { group = "androidx.activity", name = "activity", version.ref = "activity" }
 constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }
+material-v190 = { module = "com.google.android.material:material", version.ref = "materialVersion" }
 play-services-auth = { group = "com.google.android.gms", name = "play-services-auth", version.ref = "playServicesAuth" } # Corrected to use group/name
 
 
@@ -34,3 +52,5 @@ play-services-auth = { group = "com.google.android.gms", name = "play-services-a
 android-application = { id = "com.android.application", version.ref = "agp" }
 # Add this line defining the Google Services Plugin
 google-gms-googleServices = { id = "com.google.gms.google-services", version.ref = "googleServicesPlugin" }
+kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+kotlin-kapt = { id = "org.jetbrains.kotlin.kapt", version.ref = "kotlin" }

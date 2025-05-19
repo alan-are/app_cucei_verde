@@ -1,7 +1,8 @@
 plugins {
     alias(libs.plugins.android.application)
     // Add the Google Services plugin ID here
-    id("com.google.gms.google-services")
+    alias(libs.plugins.google.gms.googleServices) // Changed to use alias
+    alias(libs.plugins.kotlin.kapt) // Changed to use alias
 }
 
 android {
@@ -48,9 +49,24 @@ android {
 dependencies {
 
     implementation(libs.appcompat)
-    implementation(libs.material)
+    implementation(libs.material) // This line already exists, likely from your version catalog
+    implementation(libs.cardview) // Added CardView dependency
+    implementation(libs.coordinatorlayout) // Added CoordinatorLayout
+    implementation(libs.core.ktx) // Added AndroidX Core (includes NestedScrollView)
     implementation(libs.activity)
     implementation(libs.constraintlayout)
+    implementation(libs.material.v190)
+
+    // Firebase Storage
+    implementation(libs.firebase.storage) // Or implementation("com.google.firebase:firebase-storage-ktx") if not in version catalog
+
+    // Glide for image loading
+    implementation(libs.glide) // Or implementation("com.github.bumptech.glide:glide:4.16.0") if not in version catalog
+    annotationProcessor(libs.glide.compiler) // For Java projects
+    // If using Kotlin and kapt (which we are adding above):
+    // kapt(libs.glide.compiler) // Uncomment if your project is primarily Kotlin
+
+
 
     // --- START: Added Firebase and Google Play Services Dependencies ---
 
@@ -72,6 +88,10 @@ dependencies {
     // Check for the latest version: https://developers.google.com/android/guides/setup
     // Replace "21.2.0" with the actual latest version
     implementation(libs.play.services.auth)
+
+    // Google Play Services Location & Places
+    implementation(libs.play.services.location)
+    implementation(libs.places.sdk)
 
     // Note: play-services-tasks is usually included transitively by firebase-auth
     // You typically don't need to add it explicitly unless facing specific issues.

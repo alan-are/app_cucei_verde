@@ -4,35 +4,51 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.MediaController;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.VideoView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.core.view.WindowCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class menu_principal extends AppCompatActivity {
 
+    private static final String TAG = "menu_principal"; // Added for logging
     private Button log_out_btn;
     private ImageButton btnCreateReport, btnViewReports;
-    private GoogleSignInClient googleSignInClient; // Solo si usaste Google Sign-In
-    private ImageView chatIcon;
-    private CardView headerCard, optionsCard1, optionsCard2, chatCard;
+    private GoogleSignInClient googleSignInClient;
+    private CardView headerCard, optionsCard1, optionsCard2, cardTopCollaborators; // Added cardTopCollaborators
     private LinearLayout animationContainer;
+
+    private RecyclerView rvCollaborators;
+    private CollaboratorAdapter collaboratorAdapter;
+    private List<Collaborator> collaboratorList;
+    private TextView tvNoCollaborators;
+    private FirebaseFirestore db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,14 +56,18 @@ public class menu_principal extends AppCompatActivity {
         WindowCompat.setDecorFitsSystemWindows(getWindow(), false);
         setContentView(R.layout.menu_principal);
 
-        // Inicialización de las animaciones
+        db = FirebaseFirestore.getInstance(); // Initialize Firestore
+
         initializeViews();
         applyAnimations();
+        setupCollaboratorsSection(); // New method to setup collaborators
 
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestIdToken(getString(R.string.default_web_client_id))
+                .requestIdToken(getString(R.string.default_web_client_id)) // Ensure this string resource exists
                 .build();
-        googleSignInClient = GoogleSignIn.getClient(this, gso);        btnCreateReport = findViewById(R.id.btnCreateReport);
+        googleSignInClient = GoogleSignIn.getClient(this, gso);
+        // ... existing listener setup ...
+        btnCreateReport = findViewById(R.id.btnCreateReport);
         if (btnCreateReport != null) {
             btnCreateReport.setOnClickListener(v -> {
                 animateButtonClick(v);
@@ -67,40 +87,27 @@ public class menu_principal extends AppCompatActivity {
                     startActivity(intent);
                 }, 300);
             });
-        }        log_out_btn = findViewById(R.id.log_out_btn);
+        }
+        log_out_btn = findViewById(R.id.log_out_btn);
         if (log_out_btn != null) {
             log_out_btn.setOnClickListener(v -> {
                 animateButtonClick(v);
                 new android.os.Handler().postDelayed(this::logoutUser, 300);
             });
         }
-        
-        chatIcon = findViewById(R.id.imageView);
-        if (chatIcon != null) {
-            chatIcon.setOnClickListener(v -> {
-                // Aplicar animación al ícono del chat
-                Animation pulseAnimation = AnimationUtils.loadAnimation(this, R.anim.pulse);
-                v.startAnimation(pulseAnimation);
-                
-                Toast.makeText(this, "Iniciando chat...", Toast.LENGTH_SHORT).show();
-                // Implementar la funcionalidad del chat
-            });
-        }
-    }    private void logoutUser() {
-        // 1. Cierra sesión en Firebase
+    }
+
+    private void logoutUser() {
         FirebaseAuth.getInstance().signOut();
-
-        // 2. Cierra sesión en Google (si aplica)
         googleSignInClient.signOut().addOnCompleteListener(this, task -> {
-            // 3. Limpia datos locales (opcional)
             getSharedPreferences("MisPreferencias", MODE_PRIVATE).edit().clear().apply();
-
-            // 4. Redirige al login
             Toast.makeText(this, "Sesión cerrada", Toast.LENGTH_SHORT).show();
             startActivity(new Intent(this, cuceiverdecom.example.mainActivity.class));
             finish();
         });
-    }      private void initializeViews() {
+    }
+
+    private void initializeViews() {
         try {
             // Find our various UI elements safely - with null checks at each step
             // Try to find the toolbar - if not found, don't crash
@@ -142,17 +149,17 @@ public class menu_principal extends AppCompatActivity {
                 e.printStackTrace();
             }
                       
-            try {
-                View chatIcon = findViewById(R.id.imageView);
-                if (chatIcon != null) {
-                    View parent = (View) chatIcon.getParent();
-                    if (parent != null && parent.getParent() instanceof CardView) {
-                        chatCard = (CardView) parent.getParent();
-                    }
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+            // try { // Commented out
+            //     View chatIconView = findViewById(R.id.imageView); // Renamed from chatIcon to avoid confusion with the field // Commented out
+            //     if (chatIconView != null) { // Commented out
+            //         View parent = (View) chatIconView.getParent(); // Commented out
+            //         if (parent != null && parent.getParent() instanceof CardView) { // Commented out
+            //             chatCard = (CardView) parent.getParent(); // Commented out
+            //         } // Commented out
+            //     } // Commented out
+            // } catch (Exception e) { // Commented out
+            //     e.printStackTrace(); // Commented out
+            // } // Commented out
             
             try {
                 animationContainer = findViewById(R.id.animationContainer);
@@ -160,14 +167,19 @@ public class menu_principal extends AppCompatActivity {
                 e.printStackTrace();
             }
             
+            // Initialize collaborators section views
+            rvCollaborators = findViewById(R.id.rvCollaborators);
+            tvNoCollaborators = findViewById(R.id.tvNoCollaborators);
+            cardTopCollaborators = findViewById(R.id.cardTopCollaborators); // Initialize cardTopCollaborators
+
         } catch (Exception e) {
-            // Log any issues but don't crash
-            e.printStackTrace();
+            Log.e(TAG, "Error initializing views", e);
             Toast.makeText(this, "Se produjo un error al inicializar la vista", Toast.LENGTH_SHORT).show();
         }
-    }      private void applyAnimations() {
+    }
+
+    private void applyAnimations() {
         try {
-            // Load animations
             Animation fadeIn = AnimationUtils.loadAnimation(this, android.R.anim.fade_in);
             fadeIn.setDuration(1000);
             
@@ -175,15 +187,11 @@ public class menu_principal extends AppCompatActivity {
             Animation scaleIn = AnimationUtils.loadAnimation(this, R.anim.scale_fade_in);
             Animation slideLeft = AnimationUtils.loadAnimation(this, R.anim.slide_in_left);
             
-            // Apply animations with delays - only if views are not null
-            if (headerCard != null) {
-                headerCard.startAnimation(fadeIn);
-            }
-            
-            // Use a handler for delayed animations, but check for null before applying
+            if (headerCard != null) headerCard.startAnimation(fadeIn);
+            if (cardTopCollaborators != null) cardTopCollaborators.startAnimation(fadeIn); // Animate collaborators card
+
             if (optionsCard1 != null) {
                 new android.os.Handler().postDelayed(() -> {
-                    // Second null check in case the view became null during the delay
                     if (optionsCard1 != null && optionsCard1.getWindowToken() != null) {
                         optionsCard1.startAnimation(slideLeft);
                     }
@@ -192,31 +200,119 @@ public class menu_principal extends AppCompatActivity {
             
             if (optionsCard2 != null) {
                 new android.os.Handler().postDelayed(() -> {
-                    // Second null check in case the view became null during the delay
                     if (optionsCard2 != null && optionsCard2.getWindowToken() != null) {
                         optionsCard2.startAnimation(slideLeft);
                     }
                 }, 500);
             }
             
-            if (chatCard != null) {
-                new android.os.Handler().postDelayed(() -> {
-                    // Second null check in case the view became null during the delay  
-                    if (chatCard != null && chatCard.getWindowToken() != null) {
-                        chatCard.startAnimation(slideUp);
-                    }
-                }, 700);
-            }
         } catch (Exception e) {
-            // Log any issues but don't crash
-            e.printStackTrace();
-            // Don't show toast here since this is called from onCreate
+            Log.e(TAG, "Error applying animations", e);
         }
     }
     
     private void animateButtonClick(View view) {
         Animation scaleDown = AnimationUtils.loadAnimation(this, R.anim.scale_down);
         view.startAnimation(scaleDown);
+    }
+
+    private void setupCollaboratorsSection() {
+        collaboratorList = new ArrayList<>();
+        collaboratorAdapter = new CollaboratorAdapter(this, collaboratorList);
+        if (rvCollaborators != null) {
+            rvCollaborators.setLayoutManager(new LinearLayoutManager(this));
+            rvCollaborators.setAdapter(collaboratorAdapter);
+            rvCollaborators.setNestedScrollingEnabled(false); // Important for NestedScrollView
+        }
+        fetchCollaboratorData();
+    }
+
+    private void fetchCollaboratorData() {
+        db.collection("reportes")
+            .get()
+            .addOnCompleteListener(task -> {
+                if (task.isSuccessful()) {
+                    Map<String, Integer> userPostCounts = new HashMap<>();
+                    for (QueryDocumentSnapshot document : task.getResult()) {
+                        String userId = document.getString("userId");
+                        if (userId != null) {
+                            userPostCounts.put(userId, userPostCounts.getOrDefault(userId, 0) + 1);
+                        }
+                    }
+                    fetchUserNamesAndDisplay(userPostCounts);
+                } else {
+                    Log.e(TAG, "Error getting reports: ", task.getException());
+                    if (tvNoCollaborators != null) tvNoCollaborators.setVisibility(View.VISIBLE);
+                    if (rvCollaborators != null) rvCollaborators.setVisibility(View.GONE);
+                }
+            });
+    }
+
+    private void fetchUserNamesAndDisplay(Map<String, Integer> userPostCounts) {
+        if (userPostCounts.isEmpty()) {
+            if (tvNoCollaborators != null) tvNoCollaborators.setVisibility(View.VISIBLE);
+            if (rvCollaborators != null) rvCollaborators.setVisibility(View.GONE);
+            return;
+        }
+
+        List<Collaborator> tempCollaborators = new ArrayList<>();
+        final int[] usersToFetch = {userPostCounts.size()};
+
+        for (Map.Entry<String, Integer> entry : userPostCounts.entrySet()) {
+            String userId = entry.getKey();
+            int postCount = entry.getValue();
+
+            db.collection("usuarios").document(userId)
+                .get()
+                .addOnSuccessListener(userDocument -> {
+                    String userName = "Usuario Desconocido"; // Default name
+                    if (userDocument.exists()) {
+                        userName = userDocument.getString("nombre");
+                        if (userName == null || userName.isEmpty()) {
+                            userName = "Usuario Anónimo"; // Fallback if name field is empty
+                        }
+                    }
+                    tempCollaborators.add(new Collaborator(userId, userName, postCount));
+                    usersToFetch[0]--;
+                    if (usersToFetch[0] == 0) {
+                        // All users fetched, sort and update adapter
+                        Collections.sort(tempCollaborators, (c1, c2) -> Integer.compare(c2.getPostCount(), c1.getPostCount())); 
+                        
+                        collaboratorList.clear();
+                        // Display top 3 or all, depending on your preference. Here, displaying all sorted.
+                        collaboratorList.addAll(tempCollaborators);
+
+                        if (collaboratorList.isEmpty()) {
+                            if (tvNoCollaborators != null) tvNoCollaborators.setVisibility(View.VISIBLE);
+                            if (rvCollaborators != null) rvCollaborators.setVisibility(View.GONE);
+                        } else {
+                            if (tvNoCollaborators != null) tvNoCollaborators.setVisibility(View.GONE);
+                            if (rvCollaborators != null) rvCollaborators.setVisibility(View.VISIBLE);
+                            collaboratorAdapter.updateCollaborators(collaboratorList);
+                        }
+                    }
+                })
+                .addOnFailureListener(e -> {
+                    Log.e(TAG, "Error fetching user name for " + userId, e);
+                    // Add with default name even if fetch fails to maintain count
+                    tempCollaborators.add(new Collaborator(userId, "Usuario Desconocido", postCount));
+                    usersToFetch[0]--;
+                    if (usersToFetch[0] == 0) {
+                        // All users fetched (some might have failed), sort and update adapter
+                        Collections.sort(tempCollaborators, (c1, c2) -> Integer.compare(c2.getPostCount(), c1.getPostCount()));
+                        collaboratorList.clear();
+                        collaboratorList.addAll(tempCollaborators);
+                        if (collaboratorList.isEmpty()) {
+                            if (tvNoCollaborators != null) tvNoCollaborators.setVisibility(View.VISIBLE);
+                            if (rvCollaborators != null) rvCollaborators.setVisibility(View.GONE);
+                        } else {
+                            if (tvNoCollaborators != null) tvNoCollaborators.setVisibility(View.GONE);
+                            if (rvCollaborators != null) rvCollaborators.setVisibility(View.VISIBLE);
+                            collaboratorAdapter.updateCollaborators(collaboratorList);
+                        }
+                    }
+                });
+        }
     }
 }
 

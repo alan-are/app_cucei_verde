@@ -1,6 +1,8 @@
 package cuceiverdecom.example;
 
 import com.google.firebase.Timestamp;
+import java.util.HashMap; // Added for userVotes
+import java.util.Map;    // Added for userVotes
 
 public class Report {
     private String id;
@@ -13,13 +15,18 @@ public class Report {
     private String location;
     private Timestamp creationDate;
     private String status;
+    // private int resolutionVoteCount; // Removed old vote counter
+    private int solvedVotesCount;     // New: count for "solved" votes
+    private int unsolvedVotesCount;   // New: count for "unsolved" votes
+    private Map<String, String> userVotes; // New: to track individual user votes (userId -> "solved"/"unsolved")
 
     // Constructor vacío necesario para Firestore
     public Report() {
+        this.userVotes = new HashMap<>(); // Initialize map
     }
 
     // Constructor con todos los campos
-    public Report(String id, String title, String description, String category, String userId, 
+    public Report(String id, String title, String description, String category, String userId,
                  String userName, String imageUrl, String location, Timestamp creationDate, String status) {
         this.id = id;
         this.title = title;
@@ -31,6 +38,9 @@ public class Report {
         this.location = location;
         this.creationDate = creationDate;
         this.status = status;
+        this.solvedVotesCount = 0;     // Initialize new counter
+        this.unsolvedVotesCount = 0;   // Initialize new counter
+        this.userVotes = new HashMap<>(); // Initialize map
     }
 
     // Getters y Setters
@@ -112,5 +122,33 @@ public class Report {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public int getSolvedVotesCount() {
+        return solvedVotesCount;
+    }
+
+    public void setSolvedVotesCount(int solvedVotesCount) {
+        this.solvedVotesCount = solvedVotesCount;
+    }
+
+    public int getUnsolvedVotesCount() {
+        return unsolvedVotesCount;
+    }
+
+    public void setUnsolvedVotesCount(int unsolvedVotesCount) {
+        this.unsolvedVotesCount = unsolvedVotesCount;
+    }
+
+    public Map<String, String> getUserVotes() {
+        // Ensure userVotes is not null, especially for older documents in Firestore
+        if (this.userVotes == null) {
+            this.userVotes = new HashMap<>();
+        }
+        return userVotes;
+    }
+
+    public void setUserVotes(Map<String, String> userVotes) {
+        this.userVotes = userVotes;
     }
 }

@@ -205,42 +205,29 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Fotografía"
+                        android:text="Fotografía del Reporte"
                         android:textColor="@color/text_primary_dark"
                         android:textSize="16sp"
                         android:textStyle="bold"
                         android:fontFamily="@font/montserrat"
                         android:layout_marginBottom="8dp" />
 
-                    <LinearLayout
+                    <ImageView
+                        android:id="@+id/ivReportImagePreview"
                         android:layout_width="match_parent"
-                        android:layout_height="180dp"
-                        android:orientation="vertical"
-                        android:gravity="center"
-                        android:background="@drawable/edittext_background">
+                        android:layout_height="200dp"
+                        android:scaleType="centerCrop"
+                        android:background="@drawable/edittext_background"
+                        android:visibility="gone"
+                        android:layout_marginBottom="8dp"
+                        android:contentDescription="Vista previa de la imagen del reporte"/>
 
-                        <ImageView
-                            android:layout_width="48dp"
-                            android:layout_height="48dp"
-                            android:src="@android:drawable/ic_menu_camera"
-                            android:tint="@color/gray" />
+                    <Button
+                        android:id="@+id/btnSelectReportImage"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Seleccionar Imagen del Reporte" />
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Toca para agregar una foto"
-                            android:textColor="@color/text_secondary_dark"
-                            android:textSize="14sp"
-                            android:fontFamily="@font/montserrat"
-                            android:layout_marginTop="8dp" />
-
-                        <ImageButton
-                            android:id="@+id/imageButton"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:background="@android:color/transparent"
-                            android:scaleType="centerInside" />
-                    </LinearLayout>
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
@@ -260,42 +247,24 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Ubicación"
+                        android:text="Ubicación (Texto)"
                         android:textColor="@color/text_primary_dark"
                         android:textSize="16sp"
                         android:textStyle="bold"
                         android:fontFamily="@font/montserrat"
                         android:layout_marginBottom="8dp" />
 
-                    <LinearLayout
+                    <EditText
+                        android:id="@+id/editTextLocation"
                         android:layout_width="match_parent"
-                        android:layout_height="180dp"
-                        android:orientation="vertical"
-                        android:gravity="center"
-                        android:background="@drawable/edittext_background">
-
-                        <ImageView
-                            android:layout_width="48dp"
-                            android:layout_height="48dp"
-                            android:src="@android:drawable/ic_menu_mylocation"
-                            android:tint="@color/gray" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Toca para agregar ubicación"
-                            android:textColor="@color/text_secondary_dark"
-                            android:textSize="14sp"
-                            android:fontFamily="@font/montserrat"
-                            android:layout_marginTop="8dp" />
-
-                        <ImageButton
-                            android:id="@+id/imageButton2"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:background="@android:color/transparent"
-                            android:scaleType="centerInside" />
-                    </LinearLayout>
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/edittext_background"
+                        android:hint="Ej: Frente a rectoría, Módulo G, etc."
+                        android:inputType="textCapSentences"
+                        android:padding="12dp"
+                        android:textColor="@color/text_primary_dark"
+                        android:textColorHint="@color/text_secondary_dark"
+                        android:fontFamily="@font/montserrat" />
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 

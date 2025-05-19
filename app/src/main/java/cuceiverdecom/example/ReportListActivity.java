@@ -7,6 +7,7 @@ import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
+import androidx.appcompat.widget.SearchView; // Added for search functionality
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -27,10 +28,12 @@ public class ReportListActivity extends AppCompatActivity implements ReportAdapt
     private RecyclerView recyclerViewReports;
     private ReportAdapter reportAdapter;
     private List<Report> reportList;
+    private List<Report> filteredReportList; // Added for search
     private ProgressBar progressBar;
     private TextView tvNoReports;
-    private androidx.appcompat.widget.Toolbar toolbar; // Changed from Button backButton
-    
+    private androidx.appcompat.widget.Toolbar toolbar; 
+    private SearchView searchViewReports; // Added for search
+
     private FirebaseFirestore db;
     private FirebaseAuth mAuth;
 
@@ -47,8 +50,9 @@ public class ReportListActivity extends AppCompatActivity implements ReportAdapt
         progressBar = findViewById(R.id.progressBarReportList);
         tvNoReports = findViewById(R.id.tvNoReports);
         recyclerViewReports = findViewById(R.id.recyclerViewReports);
-        toolbar = findViewById(R.id.toolbar); // Changed from backButton and ID
-        setSupportActionBar(toolbar); // Set the toolbar as the action bar
+        toolbar = findViewById(R.id.toolbar); 
+        searchViewReports = findViewById(R.id.searchViewReports); // Initialize SearchView
+        setSupportActionBar(toolbar); 
 
         // Enable the Up button
         if (getSupportActionBar() != null) {
@@ -59,11 +63,13 @@ public class ReportListActivity extends AppCompatActivity implements ReportAdapt
         // Configurar RecyclerView
         recyclerViewReports.setLayoutManager(new LinearLayoutManager(this));
         reportList = new ArrayList<>();
-        reportAdapter = new ReportAdapter(this, reportList, this);
+        filteredReportList = new ArrayList<>(); // Initialize filtered list
+        reportAdapter = new ReportAdapter(this, filteredReportList, this); // Use filtered list for adapter
         recyclerViewReports.setAdapter(reportAdapter);
         
         // Cargar reportes
         loadReports();
+        setupSearch(); // Setup search functionality
     }    private void loadReports() {
         progressBar.setVisibility(View.VISIBLE);
         
@@ -79,7 +85,7 @@ public class ReportListActivity extends AppCompatActivity implements ReportAdapt
                     for (QueryDocumentSnapshot document : task.getResult()) {
                         try {
                             Report report = document.toObject(Report.class);
-                            // Set the ID in case it wasn't populated automatically
+                            // Set the ID in case it wasn\'t populated automatically
                             if (report.getId() == null) {
                                 report.setId(document.getId());
                             }
@@ -89,10 +95,10 @@ public class ReportListActivity extends AppCompatActivity implements ReportAdapt
                         }
                     }
                     
-                    reportAdapter.notifyDataSetChanged();
+                    filterReports(""); // Initially display all reports
                     
                     // Mostrar mensaje si no hay reportes
-                    if (reportList.isEmpty()) {
+                    if (reportList.isEmpty()) { // Check original list for initial "no reports" message
                         tvNoReports.setVisibility(View.VISIBLE);
                         recyclerViewReports.setVisibility(View.GONE);
                     } else {
@@ -130,6 +136,49 @@ public class ReportListActivity extends AppCompatActivity implements ReportAdapt
         // Intent intent = new Intent(ReportListActivity.this, ReportDetailActivity.class);
         // intent.putExtra("REPORT_ID", report.getId());
         // startActivity(intent);
+    }
+
+    private void setupSearch() {
+        searchViewReports.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                filterReports(query);
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                filterReports(newText);
+                return true;
+            }
+        });
+    }
+
+    private void filterReports(String query) {
+        filteredReportList.clear();
+        if (query.isEmpty()) {
+            filteredReportList.addAll(reportList);
+        } else {
+            String lowerCaseQuery = query.toLowerCase().trim();
+            for (Report report : reportList) {
+                if ((report.getTitle() != null && report.getTitle().toLowerCase().contains(lowerCaseQuery)) ||
+                    (report.getDescription() != null && report.getDescription().toLowerCase().contains(lowerCaseQuery)) ||
+                    (report.getCategory() != null && report.getCategory().toLowerCase().contains(lowerCaseQuery)) ||
+                    (report.getLocation() != null && report.getLocation().toLowerCase().contains(lowerCaseQuery))) {
+                    filteredReportList.add(report);
+                }
+            }
+        }
+        reportAdapter.notifyDataSetChanged();
+
+        // Update "no reports" message based on filtered list
+        if (filteredReportList.isEmpty()) {
+            tvNoReports.setVisibility(View.VISIBLE);
+            recyclerViewReports.setVisibility(View.GONE);
+        } else {
+            tvNoReports.setVisibility(View.GONE);
+            recyclerViewReports.setVisibility(View.VISIBLE);
+        }
     }
 
     @Override

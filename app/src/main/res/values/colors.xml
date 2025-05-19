@@ -17,6 +17,8 @@
     <color name="accent_yellow">#FFD600</color>
     <color name="accent_orange">#FF9100</color>
     <color name="accent_red">#FF3D00</color>
+    <color name="red_error">#D32F2F</color> <!-- Added missing red_error color -->
+    <color name="accent_blue">#2962FF</color> <!-- Added blue for 'Pendiente' status -->
     
     <!-- Colores para fondos -->
     <color name="background_dark">#121212</color>

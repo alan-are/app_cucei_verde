@@ -64,16 +64,19 @@
                         android:layout_width="24dp"
                         android:layout_height="24dp"
                         android:src="@android:drawable/ic_menu_search"
-                        android:tint="@color/gray"
+                        app:tint="@color/gray"
                         android:layout_marginEnd="8dp" />
 
-                    <TextView
+                    <androidx.appcompat.widget.SearchView
+                        android:id="@+id/searchViewReports"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Buscar reportes..."
+                        android:queryHint="Buscar reportes..."
+                        app:queryHint="Buscar reportes..."
                         android:textColor="@color/gray"
                         android:textSize="16sp"
-                        android:fontFamily="@font/montserrat" />
+                        android:fontFamily="@font/montserrat"
+                        app:iconifiedByDefault="false" />
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
